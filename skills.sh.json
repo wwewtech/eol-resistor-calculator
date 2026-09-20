@@ -1,0 +1,7 @@
+{
+  "name": "eol-resistor-calculator",
+  "group": {
+    "title": "Security Systems & Alarm Engineering",
+    "description": "Size and verify end-of-line resistors for intrusion alarm zones: single vs double EOL, panel-specific values, DEOL state tables, and placement testing."
+  }
+}

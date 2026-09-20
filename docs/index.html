@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EOL Resistor Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #000000;
+            --bg-elevated: #09090b;
+            --border: #27272a;
+            --text-main: #f4f4f5;
+            --text-muted: #a1a1aa;
+            --accent: #ffffff;
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        header {
+            position: sticky;
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        h1, h2 {
+            font-weight: 600;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-elevated);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+        .install-box {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 2rem auto;
+            max-width: 600px;
+            text-align: left;
+        }
+        .section {
+            margin-bottom: 3rem;
+            border: 1px solid var(--border);
+            padding: 2rem;
+            border-radius: 6px;
+            background: var(--bg-elevated);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div style="font-weight: 600">wwewtech</div>
+        <code>eol-resistor-calculator</code>
+    </header>
+    <div class="container">
+        <div class="hero">
+            <h1>EOL Resistor Calculator</h1>
+            <p style="color: var(--text-muted)">Size and verify end-of-line (EOL) resistors for intrusion alarm zones.</p>
+            <div class="install-box">
+                <code>npx skills add wwewtech/eol-resistor-calculator</code>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>SEOL vs DEOL Configurations</h2>
+            <p>Unsupervised alarm loops cannot tell a cut wire from a quiet zone. Proper sizing ensures the panel can detect normal, alarm, tamper, and fault conditions.</p>
+            <pre><code>Normal State (DEOL) = R1 + R2
+Alarm State = R1 or R2 (depending on NO/NC)</code></pre>
+        </div>
+
+        <div class="section">
+            <h2>Placement Rule</h2>
+            <p>The resistor goes at the <strong>END</strong> of the loop (last device), never inside the panel. Panel-side placement blinds supervision to the field wiring.</p>
+        </div>
+    </div>
+</body>
+</html>

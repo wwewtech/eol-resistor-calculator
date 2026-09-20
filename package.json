@@ -1,0 +1,24 @@
+{
+  "name": "@wwewtech/eol-resistor-calculator",
+  "version": "1.0.0",
+  "description": "Size and verify end-of-line (EOL) resistors for intrusion alarm zones.",
+  "author": "Pavel Lebedev <pasha20051344@gmail.com> (https://wwew.tech)",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "skills-sh",
+    "claude-code",
+    "antigravity",
+    "cursor",
+    "windsurf",
+    "eol-resistor",
+    "alarm-panel",
+    "security-systems",
+    "dsc",
+    "honeywell",
+    "zone-wiring"
+  ],
+  "bin": {
+    "eol-resistor-calculator": "index.js"
+  }
+}

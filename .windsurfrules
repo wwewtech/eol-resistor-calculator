@@ -1,0 +1,5 @@
+# EOL Resistor Calculator
+- Always verify reference values for DEOL and SEOL against the panel manual.
+- Check placement rule explicitly (resistor at the END of the loop, not in the panel).
+- Never recommend disabling supervision or swapping NO/NC logic to dodge a trouble condition.
+- Account for wire run resistance if >1% of EOL value.

@@ -1,0 +1,27 @@
+{
+  "evals": [
+    {
+      "prompt": "Compute the DEOL values for a DSC PowerSeries panel with 16 zones. The panel uses 5.6k resistors.",
+      "files": [],
+      "id": 1,
+      "expected_output": "Agent shows arithmetic: normal = R1+R2 = 5.6k+5.6k = 11.2k in the loop path, alarm = one 5.6k resistor only, short = 0 ohms (tamper), open = infinity (cut/open). References DSC installation manual, emphasizes placement at END of loop not at panel, and provides the full state table.",
+      "name": "deol_dsc_powerseries"
+    },
+    {
+      "prompt": "Zone 7 on my Honeywell Vista-20P shows intermittent trouble conditions. The EOL is 2.2k and the wire run is about 800 feet of 22AWG. The zone reads correctly most of the time but occasionally faults.",
+      "files": [],
+      "id": 2,
+      "expected_output": "Agent calculates wire resistance: ~0.02 ohm/ft x 800ft = ~16 ohms, which is <1% of 2.2k EOL. Flags this as unlikely to cause issues from wire resistance alone. Diagnoses probable failing splice or terminal connection as the root cause, recommends re-termination, never recommends disabling supervision.",
+      "name": "intermittent_trouble"
+    },
+    {
+      "prompt": "I installed the 5.6k EOL resistors inside my DSC panel at the terminal strip to keep things neat. All zones show normal. Is this okay?",
+      "files": [],
+      "id": 3,
+      "expected_output": "Agent identifies this as the #1 field error. Panel-side placement blinds supervision to field wiring faults (cuts, shorts, tampering in the field go undetected). Resistor MUST go at the END of the loop (last device). Insists on moving resistors to the field devices despite all zones currently reading normal.",
+      "name": "panel_side_placement"
+    }
+  ],
+  "skill_name": "eol-resistor-calculator",
+  "version": "1.0.0"
+}
