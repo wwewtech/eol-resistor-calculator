@@ -1,9 +1,8 @@
 {
   "name": "@wwewtech/eol-resistor-calculator",
   "version": "1.0.0",
-  "description": "Size and verify end-of-line (EOL) resistors for intrusion alarm zones.",
-  "author": "Pavel Lebedev <pasha20051344@gmail.com> (https://wwew.tech)",
-  "license": "MIT",
+  "description": "Autonomous Security Loop Supervision & EOL Resistor Calculator for AI Agents. Calculates SEOL/DEOL values, wire drops, and tamper states for alarm panels.",
+  "main": "SKILL.md",
   "keywords": [
     "agent-skills",
     "skills-sh",
@@ -11,14 +10,20 @@
     "antigravity",
     "cursor",
     "windsurf",
-    "eol-resistor",
-    "alarm-panel",
     "security-systems",
-    "dsc",
-    "honeywell",
-    "zone-wiring"
+    "hardware",
+    "electronics",
+    "alarm-panel",
+    "circuit-design"
   ],
-  "bin": {
-    "eol-resistor-calculator": "index.js"
+  "author": "Pavel Lebedev <pasha20051344@gmail.com> (https://wwew.tech)",
+  "license": "MIT",
+  "homepage": "https://skills.sh/wwewtech/eol-resistor-calculator",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wwewtech/eol-resistor-calculator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wwewtech/eol-resistor-calculator/issues"
   }
 }

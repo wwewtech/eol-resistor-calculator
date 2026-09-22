@@ -1,100 +1,609 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EOL Resistor Calculator</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #000000;
-            --bg-elevated: #09090b;
-            --border: #27272a;
-            --text-main: #f4f4f5;
-            --text-muted: #a1a1aa;
-            --accent: #ffffff;
-        }
-        body {
-            background-color: var(--bg);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-        header {
-            position: sticky;
-            top: 0;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-        h1, h2 {
-            font-weight: 600;
-        }
-        .hero {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-        code {
-            font-family: 'JetBrains Mono', monospace;
-            background: var(--bg-elevated);
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            border: 1px solid var(--border);
-        }
-        .install-box {
-            background: var(--bg-elevated);
-            border: 1px solid var(--border);
-            padding: 1.5rem;
-            border-radius: 6px;
-            margin: 2rem auto;
-            max-width: 600px;
-            text-align: left;
-        }
-        .section {
-            margin-bottom: 3rem;
-            border: 1px solid var(--border);
-            padding: 2rem;
-            border-radius: 6px;
-            background: var(--bg-elevated);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eol-resistor-calculator · Precision Security Loop Supervision & Simulator</title>
+  <meta name="description" content="Calculate and simulate Single (SEOL), Double (DEOL), and Triple (TEOL) alarm zone resistor loops across DSC, Honeywell, Paradox, Bosch, and Texecom panels.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%23000%22/><path d=%22M6 16h4l3-6 4 12 3-6h6%22 fill=%22none%22 stroke=%22%23f59e0b%22 stroke-width=%222.5%22 stroke-linecap=%22round%22/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #000000;
+      --surface-1: #09090b;
+      --surface-2: #121215;
+      --surface-elevated: #18181c;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.16);
+      --text: #f4f4f5;
+      --text-dim: #a1a1aa;
+      --text-muted: #52525b;
+      --accent-amber: #f59e0b;
+      --accent-emerald: #10b981;
+      --accent-blue: #38bdf8;
+      --accent-red: #ef4444;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', Consolas, monospace;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header.site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-subtle);
+      height: 54px;
+      display: flex;
+      align-items: center;
+    }
+    .header-inner {
+      max-width: 1040px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #fff;
+    }
+    .brand-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 5px;
+      background: #78350f;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      display: grid;
+      place-items: center;
+      color: var(--accent-amber);
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .brand-title { font-weight: 600; font-size: 14px; letter-spacing: -0.01em; }
+    .nav-links { display: flex; gap: 16px; font-size: 13px; }
+    .nav-links a { color: var(--text-dim); text-decoration: none; transition: color 120ms; }
+    .nav-links a:hover { color: #fff; }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 40px 20px 100px;
+    }
+
+    .hero {
+      padding: 40px 0 32px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 20px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: #fcd34d;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      font-size: 16px;
+      color: var(--text-dim);
+      max-width: 720px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .install-bar {
+      display: flex;
+      align-items: center;
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      max-width: 540px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+    }
+    .install-bar code { flex: 1; color: #fbbf24; }
+    .copy-btn {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 120ms var(--ease-out);
+    }
+    .copy-btn:hover { background: #27272a; border-color: var(--border-hover); }
+    .copy-btn:active { transform: scale(0.96); }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin: 48px 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-subtitle { color: var(--text-dim); font-size: 14px; margin-bottom: 24px; }
+
+    /* Lab Box */
+    .lab-box {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    .lab-header {
+      background: var(--surface-2);
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .lab-title { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--text-dim); }
+    .lab-body { padding: 24px; }
+
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 768px) {
+      .grid-2col { grid-template-columns: 1fr; }
+    }
+
+    /* Controls */
+    .field-group { margin-bottom: 16px; }
+    .field-group label { display: block; font-size: 12px; color: var(--text-dim); margin-bottom: 6px; }
+    select, input[type=range] {
+      width: 100%;
+      background: #000;
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      outline: none;
+    }
+    select:focus { border-color: var(--accent-amber); }
+
+    /* Multimeter Simulation */
+    .multimeter-card {
+      background: #000;
+      border: 2px solid #27272a;
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+    }
+    .meter-display {
+      background: #142016;
+      border: 2px solid #1f3622;
+      border-radius: 6px;
+      padding: 14px 20px;
+      width: 100%;
+      text-align: right;
+      font-family: var(--font-mono);
+      color: #4ade80;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+    .meter-unit { font-size: 14px; color: #22c55e; margin-left: 6px; }
+
+    /* Zone status pill */
+    .zone-status-pill {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .status-secure { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid #10b981; }
+    .status-alarm { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid #ef4444; }
+    .status-tamper { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid #f59e0b; }
+
+    /* State Switchers */
+    .state-btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .state-btn {
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      transition: all 120ms;
+    }
+    .state-btn:hover { background: #27272a; border-color: var(--border-hover); }
+    .state-btn.active { background: #f59e0b; color: #000; font-weight: 600; border-color: #f59e0b; }
+
+    /* Telemetry list */
+    .stat-row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid var(--border-subtle); font-size: 12.5px; }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-k { color: var(--text-dim); }
+    .stat-v { font-family: var(--font-mono); font-weight: 500; }
+
+    /* Tables */
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 16px;
+      border: 1px solid var(--border-subtle);
+    }
+    table.data-table th {
+      background: var(--surface-2);
+      text-align: left;
+      padding: 10px 14px;
+      font-weight: 600;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-dim);
+    }
+    table.data-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--surface-1);
+    }
+
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 40px 0;
+      color: var(--text-muted);
+      font-size: 13px;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div style="font-weight: 600">wwewtech</div>
-        <code>eol-resistor-calculator</code>
-    </header>
-    <div class="container">
-        <div class="hero">
-            <h1>EOL Resistor Calculator</h1>
-            <p style="color: var(--text-muted)">Size and verify end-of-line (EOL) resistors for intrusion alarm zones.</p>
-            <div class="install-box">
-                <code>npx skills add wwewtech/eol-resistor-calculator</code>
-            </div>
-        </div>
-        
-        <div class="section">
-            <h2>SEOL vs DEOL Configurations</h2>
-            <p>Unsupervised alarm loops cannot tell a cut wire from a quiet zone. Proper sizing ensures the panel can detect normal, alarm, tamper, and fault conditions.</p>
-            <pre><code>Normal State (DEOL) = R1 + R2
-Alarm State = R1 or R2 (depending on NO/NC)</code></pre>
-        </div>
 
-        <div class="section">
-            <h2>Placement Rule</h2>
-            <p>The resistor goes at the <strong>END</strong> of the loop (last device), never inside the panel. Panel-side placement blinds supervision to the field wiring.</p>
-        </div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#" class="brand">
+        <div class="brand-icon">&#x2126;</div>
+        <span class="brand-title">eol-resistor-calculator</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#simulator">Loop Simulator</a>
+        <a href="#panels">Panel Standards</a>
+        <a href="#anti-patterns">Anti-Patterns</a>
+        <a href="https://github.com/wwewtech/eol-resistor-calculator" target="_blank" rel="noopener">GitHub</a>
+      </nav>
     </div>
+  </header>
+
+  <div class="container">
+
+    <section class="hero">
+      <div class="badge">SECURITY LOOP SUPERVISION · EN 50131 GRADE 2/3</div>
+      <h1>Size &amp; Simulate Alarm EOL Resistor Loops</h1>
+      <p>Precision calculation for Single (SEOL), Double (DEOL), and Triple (TEOL) security loops. Calculate two-conductor copper wire resistance drops, inspect 4-state tamper tables, and verify ADC threshold windows across major panel manufacturers.</p>
+
+      <div class="install-bar">
+        <code>npx skills add wwewtech/eol-resistor-calculator</code>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('npx skills add wwewtech/eol-resistor-calculator'); this.innerText='Copied!'; setTimeout(()=>this.innerText='Copy', 1500)">Copy</button>
+      </div>
+    </section>
+
+    <!-- LIVE LOOP SIMULATOR -->
+    <h2 class="section-title" id="simulator">&#x26A1; Interactive Loop Diagnostic Laboratory</h2>
+    <p class="section-subtitle">Simulate real-world field conditions, wire lengths, and sensor states with real-time digital multimeter feedback.</p>
+
+    <div class="lab-box">
+      <div class="lab-header">
+        <span class="lab-title">ZONE LOOP CIRCUIT &amp; MULTIMETER BENCH</span>
+      </div>
+      <div class="lab-body">
+        <div class="grid-2col">
+          <!-- Configuration -->
+          <div>
+            <div class="field-group">
+              <label>Alarm Panel Platform</label>
+              <select id="selPanel" onchange="updateCircuit()">
+                <option value="dsc">DSC PowerSeries Neo (5.6k DEOL)</option>
+                <option value="honeywell">Honeywell Ademco Vista (2.0k SEOL / DEOL)</option>
+                <option value="paradox">Paradox EVO / Spectra (1.0k DEOL)</option>
+                <option value="texecom">Texecom Premier Elite (2.2k / 4.7k)</option>
+                <option value="bosch">Bosch B/G Series (1.0k / 2.0k)</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label>Supervision Mode</label>
+              <select id="selMode" onchange="updateCircuit()">
+                <option value="deol">Double-EOL (DEOL - 4-State Tamper &amp; Alarm)</option>
+                <option value="seol">Single-EOL (SEOL - 3-State Short / Open)</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label>Wire Gauge</label>
+              <select id="selGauge" onchange="updateCircuit()">
+                <option value="22" selected>22 AWG Solid Copper (0.053 &Omega;/m)</option>
+                <option value="20">20 AWG Solid Copper (0.033 &Omega;/m)</option>
+                <option value="18">18 AWG Solid Copper (0.021 &Omega;/m)</option>
+                <option value="24">24 AWG Solid Copper (0.084 &Omega;/m)</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label style="display: flex; justify-content: space-between;">
+                <span>One-Way Run Distance</span>
+                <span id="lblDist" style="font-family: var(--font-mono); color: #fff;">120 m</span>
+              </label>
+              <input type="range" id="rngDist" min="10" max="300" step="5" value="120" oninput="updateCircuit()">
+            </div>
+
+            <div class="stat-row"><span class="stat-k">Two-Conductor Wire Drop</span><span class="stat-v" id="valWireDrop">12.72 &Omega;</span></div>
+            <div class="stat-row"><span class="stat-k">Placement Standard</span><span class="stat-v" style="color: var(--accent-emerald);">Far-End Sensor Housing</span></div>
+          </div>
+
+          <!-- Multimeter & State Simulator -->
+          <div>
+            <div class="multimeter-card">
+              <div class="meter-display">
+                <span id="meterVal">5.61</span><span class="meter-unit" id="meterUnit">k&Omega;</span>
+              </div>
+              <div class="zone-status-pill status-secure" id="zoneStatusPill">SECURE (NORMAL)</div>
+            </div>
+
+            <div style="margin-top: 18px;">
+              <label style="font-size: 11px; font-family: var(--font-mono); color: var(--text-dim);">SIMULATE FIELD SENSOR ACTION:</label>
+              <div class="state-btn-row">
+                <button class="state-btn active" id="btnSecure" onclick="setSimState('secure')">Door Closed (Secure)</button>
+                <button class="state-btn" id="btnAlarm" onclick="setSimState('alarm')">Door Opened (Alarm)</button>
+                <button class="state-btn" id="btnTamper" onclick="setSimState('tamper')">Cover Off (Tamper)</button>
+                <button class="state-btn" id="btnShort" onclick="setSimState('short')">Staple Short (0 &Omega;)</button>
+                <button class="state-btn" id="btnCut" onclick="setSimState('cut')">Wire Cut (&infin; &Omega;)</button>
+              </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+              <div class="stat-row"><span class="stat-k">Calculated Terminal Voltage</span><span class="stat-v" id="valVolt">2.48 V DC</span></div>
+              <div class="stat-row"><span class="stat-k">Panel Acceptance Range</span><span class="stat-v" id="valAccept">5.04k &ndash; 6.16k &Omega;</span></div>
+              <div class="stat-row"><span class="stat-k">Compliance Rating</span><span class="stat-v" style="color: var(--accent-emerald);">EN 50131 Grade 2</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL STANDARDS MATRIX -->
+    <h2 class="section-title" id="panels">&#x1F4CA; Manufacturer Resistance Standard Matrix</h2>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Panel Family</th>
+          <th>SEOL Nominal</th>
+          <th>DEOL Normal</th>
+          <th>DEOL Alarm</th>
+          <th>Tamper (Short)</th>
+          <th>Tamper (Open)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>DSC PowerSeries Neo</strong></td>
+          <td>5.6k &Omega;</td>
+          <td>5.6k &Omega;</td>
+          <td>11.2k &Omega;</td>
+          <td>0 &Omega;</td>
+          <td>&infin; &Omega;</td>
+        </tr>
+        <tr>
+          <td><strong>Honeywell Vista</strong></td>
+          <td>2.0k &Omega;</td>
+          <td>2.0k &Omega;</td>
+          <td>4.0k &Omega;</td>
+          <td>0 &Omega;</td>
+          <td>&infin; &Omega;</td>
+        </tr>
+        <tr>
+          <td><strong>Paradox EVO / Spectra</strong></td>
+          <td>1.0k &Omega;</td>
+          <td>1.0k &Omega;</td>
+          <td>2.0k &Omega;</td>
+          <td>0 &Omega;</td>
+          <td>&infin; &Omega;</td>
+        </tr>
+        <tr>
+          <td><strong>Texecom Premier</strong></td>
+          <td>2.2k &Omega;</td>
+          <td>2.2k &Omega;</td>
+          <td>6.9k &Omega;</td>
+          <td>0 &Omega;</td>
+          <td>&infin; &Omega;</td>
+        </tr>
+        <tr>
+          <td><strong>Bosch B / G Series</strong></td>
+          <td>1.0k &Omega;</td>
+          <td>1.0k &Omega;</td>
+          <td>2.0k &Omega;</td>
+          <td>0 &Omega;</td>
+          <td>&infin; &Omega;</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ANTI-PATTERNS -->
+    <h2 class="section-title" id="anti-patterns">&#x1F6A8; Banned Alarm Supervision Anti-Patterns</h2>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Anti-Pattern</th>
+          <th>Manifestation</th>
+          <th>Mandatory Production Counter-Rule</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Panel-Terminal Stacking</strong></td>
+          <td>Resistors crimped into panel screw terminals</td>
+          <td>Install resistors strictly inside remote detector casing.</td>
+        </tr>
+        <tr>
+          <td><strong>Vendor Value Cross-Contamination</strong></td>
+          <td>Putting 2.0k Honeywell onto DSC 5.6k panel</td>
+          <td>Enforce manufacturer-specific nominal resistor standards.</td>
+        </tr>
+        <tr>
+          <td><strong>DEOL Series/Parallel Swap</strong></td>
+          <td>Inverting resistor positions on alarm relay</td>
+          <td>R_ALARM across NC relay; R_EOL in series with loop.</td>
+        </tr>
+        <tr>
+          <td><strong>Wire Drop Neglect</strong></td>
+          <td>Ignoring resistance on 200m runs</td>
+          <td>Calculate two-conductor copper resistance: $2 \times D \times \rho$.</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <footer>
+    <div class="container" style="padding: 0;">
+      <p>eol-resistor-calculator · MIT License · EN 50131 Compliance · <a href="https://github.com/wwewtech/eol-resistor-calculator" style="color: var(--text-dim);">wwewtech</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const PANEL_DATA = {
+      dsc: { name: 'DSC', eol: 5600, alarm: 5600 },
+      honeywell: { name: 'Honeywell', eol: 2000, alarm: 2000 },
+      paradox: { name: 'Paradox', eol: 1000, alarm: 1000 },
+      texecom: { name: 'Texecom', eol: 2200, alarm: 4700 },
+      bosch: { name: 'Bosch', eol: 1000, alarm: 1000 }
+    };
+
+    const WIRE_RHO = { 18: 0.0209, 20: 0.0333, 22: 0.0530, 24: 0.0842 };
+
+    let currentSimState = 'secure';
+
+    function setSimState(st) {
+      currentSimState = st;
+      document.querySelectorAll('.state-btn').forEach(b => b.classList.remove('active'));
+      const idMap = { secure: 'btnSecure', alarm: 'btnAlarm', tamper: 'btnTamper', short: 'btnShort', cut: 'btnCut' };
+      if (idMap[st]) document.getElementById(idMap[st]).classList.add('active');
+      updateCircuit();
+    }
+
+    function updateCircuit() {
+      const panelKey = document.getElementById('selPanel').value;
+      const mode = document.getElementById('selMode').value;
+      const gauge = parseInt(document.getElementById('selGauge').value);
+      const dist = parseInt(document.getElementById('rngDist').value);
+
+      document.getElementById('lblDist').innerText = `${dist} m`;
+
+      const cfg = PANEL_DATA[panelKey];
+      const wireOhms = 2.0 * dist * WIRE_RHO[gauge];
+      document.getElementById('valWireDrop').innerText = `${wireOhms.toFixed(2)} \u03A9`;
+
+      let measuredOhms = 0;
+      let statusText = 'SECURE (NORMAL)';
+      let statusClass = 'status-secure';
+
+      if (currentSimState === 'secure') {
+        measuredOhms = cfg.eol + wireOhms;
+        statusText = 'SECURE (NORMAL)';
+        statusClass = 'status-secure';
+      } else if (currentSimState === 'alarm') {
+        measuredOhms = (mode === 'deol' ? (cfg.eol + cfg.alarm) : 9999999) + wireOhms;
+        statusText = 'ALARM (TRIPPED)';
+        statusClass = 'status-alarm';
+      } else if (currentSimState === 'tamper') {
+        measuredOhms = 9999999;
+        statusText = 'TAMPER (OPEN SWITCH)';
+        statusClass = 'status-tamper';
+      } else if (currentSimState === 'short') {
+        measuredOhms = wireOhms;
+        statusText = 'TAMPER (SHORT CIRCUIT)';
+        statusClass = 'status-tamper';
+      } else if (currentSimState === 'cut') {
+        measuredOhms = 9999999;
+        statusText = 'TAMPER (CUT WIRE)';
+        statusClass = 'status-tamper';
+      }
+
+      // Render Multimeter
+      if (measuredOhms >= 999999) {
+        document.getElementById('meterVal').innerText = 'O.L';
+        document.getElementById('meterUnit').innerText = '\u221E \u03A9';
+      } else if (measuredOhms >= 1000) {
+        document.getElementById('meterVal').innerText = (measuredOhms / 1000).toFixed(2);
+        document.getElementById('meterUnit').innerText = 'k\u03A9';
+      } else {
+        document.getElementById('meterVal').innerText = measuredOhms.toFixed(1);
+        document.getElementById('meterUnit').innerText = '\u03A9';
+      }
+
+      const pill = document.getElementById('zoneStatusPill');
+      pill.className = `zone-status-pill ${statusClass}`;
+      pill.innerText = statusText;
+
+      // Terminal Voltage (5V pullup with 2200 ohm internal)
+      const vRef = 5.0;
+      const rPullup = 2200.0;
+      let vZone = (measuredOhms >= 999999) ? vRef : (vRef * (measuredOhms / (rPullup + measuredOhms)));
+      document.getElementById('valVolt').innerText = `${vZone.toFixed(2)} V DC`;
+
+      const minAccept = (cfg.eol * 0.9).toFixed(0);
+      const maxAccept = (cfg.eol * 1.1).toFixed(0);
+      document.getElementById('valAccept').innerText = `${minAccept} \u2013 ${maxAccept} \u03A9 (\u00B110%)`;
+    }
+
+    updateCircuit();
+  </script>
 </body>
 </html>

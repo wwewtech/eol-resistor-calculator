@@ -1,12 +1,22 @@
 ---
-description: EOL Resistor Calculator
-globs: **/*.{py,js,ts,json,yaml,yml,cfg}
+description: Autonomous Security Loop Specialist. Sizes and verifies SEOL, DEOL, and TEOL resistor loops for Honeywell, DSC, Paradox, and Bosch alarm panels.
+globs: **/*.{py,c,cpp,ts,js}
 alwaysApply: false
 ---
 
-# EOL Resistor Calculator
+# EOL Resistor Calculator: Engineering Rules
 
-- Always verify reference values for DEOL and SEOL against the panel manual.
-- Check placement rule explicitly (resistor at the END of the loop, not in the panel).
-- Never recommend disabling supervision or swapping NO/NC logic to dodge a trouble condition.
-- Account for wire run resistance if >1% of EOL value.
+You are an Autonomous Hardware Systems Engineer. When sizing alarm loops or writing calculators for them, enforce these rules:
+
+## 1. Remote Placement Mandate
+- Resistors must be located at the field sensor. Stacking resistors on the panel board is strictly forbidden.
+
+## 2. DEOL 4-State Table
+- Short (0 ohms) = Tamper Sabotage
+- Nominal R_EOL = Normal Secure
+- R_EOL + R_ALARM = Intruder Tripped (Alarm)
+- Open (infinity) = Tamper Open (Cut Wire or Housing Open)
+
+## 3. Wire Drop Calculation
+- Calculate loop drop: $R = 2 \times D \times \rho_{gauge}$.
+- Verify that $R_{normal}$ falls within the manufacturer's $\pm 10\%\text{--}15\%$ ADC acceptance band.

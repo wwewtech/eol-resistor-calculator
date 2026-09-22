@@ -1,27 +1,22 @@
 {
   "evals": [
     {
-      "prompt": "Compute the DEOL values for a DSC PowerSeries panel with 16 zones. The panel uses 5.6k resistors.",
-      "files": [],
       "id": 1,
-      "expected_output": "Agent shows arithmetic: normal = R1+R2 = 5.6k+5.6k = 11.2k in the loop path, alarm = one 5.6k resistor only, short = 0 ohms (tamper), open = infinity (cut/open). References DSC installation manual, emphasizes placement at END of loop not at panel, and provides the full state table.",
-      "name": "deol_dsc_powerseries"
+      "name": "deol-tamper-and-placement-rules",
+      "prompt": "How do I wire a Bosch motion detector to a DSC PowerSeries panel using double EOL? Can I put the resistors at the panel terminals to keep things tidy?",
+      "expected_output": "The agent strictly warns against placing resistors at the panel board, identifying panel stacking as an EN 50131 Grade 2 violation that leaves the cable run unsupervised. It mandates placing two 5.6k resistors inside the detector casing: 5.6k in series with the tamper circuit, and 5.6k in parallel across the NC alarm relay. It provides the 4-state resistance table (0 ohms Tamper, 5.6k Normal, 11.2k Alarm, infinity Tamper Open)."
     },
     {
-      "prompt": "Zone 7 on my Honeywell Vista-20P shows intermittent trouble conditions. The EOL is 2.2k and the wire run is about 800 feet of 22AWG. The zone reads correctly most of the time but occasionally faults.",
-      "files": [],
       "id": 2,
-      "expected_output": "Agent calculates wire resistance: ~0.02 ohm/ft x 800ft = ~16 ohms, which is <1% of 2.2k EOL. Flags this as unlikely to cause issues from wire resistance alone. Diagnoses probable failing splice or terminal connection as the root cause, recommends re-termination, never recommends disabling supervision.",
-      "name": "intermittent_trouble"
+      "name": "copper-wire-resistance-drop-calculation",
+      "prompt": "I have an outdoor perimeter beam running 180 meters away from a Honeywell Vista panel using 22 AWG alarm wire. Calculate the expected loop resistance in normal secure state.",
+      "expected_output": "The agent computes two-conductor loop resistance: 2 * 180m * 0.053 ohms/m = 19.08 ohms. Adding Honeywell's nominal 2,000 ohm SEOL resistor gives an expected normal loop reading of 2,019.08 ohms. It evaluates this against Vista's +/- 15% tolerance window (1,700 - 2,300 ohms) and confirms that 22 AWG is fully acceptable."
     },
     {
-      "prompt": "I installed the 5.6k EOL resistors inside my DSC panel at the terminal strip to keep things neat. All zones show normal. Is this okay?",
-      "files": [],
       "id": 3,
-      "expected_output": "Agent identifies this as the #1 field error. Panel-side placement blinds supervision to field wiring faults (cuts, shorts, tampering in the field go undetected). Resistor MUST go at the END of the loop (last device). Insists on moving resistors to the field devices despite all zones currently reading normal.",
-      "name": "panel_side_placement"
+      "name": "fire-vs-burg-supervision-discrimination",
+      "prompt": "Can I use the same Double-EOL wiring with 5.6k resistors for a 2-wire smoke detector on my DSC panel?",
+      "expected_output": "The agent explicitly rejects using burglar Double-EOL on fire loops. It explains that 2-wire fire zones require Normally Open (NO) latching detector contacts supervised by a Single-EOL resistor (typically 2.2k on Zone 4 for classic DSC, or panel-specific fire specs), and clarifies that short circuits on fire loops trigger an immediate Fire Alarm, not a burglar tamper."
     }
-  ],
-  "skill_name": "eol-resistor-calculator",
-  "version": "1.0.0"
+  ]
 }

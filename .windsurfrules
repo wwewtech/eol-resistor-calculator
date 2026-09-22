@@ -1,5 +1,9 @@
-# EOL Resistor Calculator
-- Always verify reference values for DEOL and SEOL against the panel manual.
-- Check placement rule explicitly (resistor at the END of the loop, not in the panel).
-- Never recommend disabling supervision or swapping NO/NC logic to dodge a trouble condition.
-- Account for wire run resistance if >1% of EOL value.
+# Windsurf Rules: EOL Resistor Calculator
+
+Autonomous Security Loop Supervision & EOL Resistor Calculator.
+
+1. Far-End Placement: Strictly enforce resistor installation at the detector housing.
+2. 4-State Table: Maintain distinct resistance boundaries for Normal, Alarm, Short, and Open states.
+3. Copper Resistance Compensation: Calculate series resistance for field runs > 50m.
+4. Panel Integrity: Enforce correct vendor resistance standards (DSC 5.6k, Honeywell 2.0k, etc.).
+5. Safety: No supervision bypass advice permitted under any circumstances.

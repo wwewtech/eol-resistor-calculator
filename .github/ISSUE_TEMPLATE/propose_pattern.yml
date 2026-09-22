@@ -1,0 +1,18 @@
+name: Propose Panel Profile / Preset
+description: Suggest resistor values and ADC threshold windows for an unlisted alarm panel
+labels: ["enhancement", "panel-profile"]
+body:
+  - type: input
+    id: panel_family
+    attributes:
+      label: Panel Brand & Model
+      placeholder: e.g. Risco LightSYS Plus
+    validations:
+      required: true
+  - type: textarea
+    id: specifications
+    attributes:
+      label: Manufacturer Loop Specifications
+      description: Provide SEOL, DEOL, TEOL resistance values and tolerance windows.
+    validations:
+      required: true

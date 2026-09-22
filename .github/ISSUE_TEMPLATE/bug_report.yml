@@ -1,0 +1,26 @@
+name: Bug Report
+description: Report a calculation discrepancy, panel value mismatch, or schematic error
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for helping improve eol-resistor-calculator!
+  - type: input
+    id: panel_model
+    attributes:
+      label: Alarm Panel Model
+      placeholder: e.g. DSC Neo HS2064 / Honeywell Vista-20P
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Issue Description
+      description: Describe what resistance calculation or zone state threshold was unexpected.
+    validations:
+      required: true
+  - type: textarea
+    id: measurements
+    attributes:
+      label: Multimeter Measurements
+      description: Paste measured terminal voltages and DC resistance values across states.

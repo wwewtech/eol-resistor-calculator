@@ -1,7 +1,13 @@
 {
-  "name": "eol-resistor-calculator",
-  "group": {
-    "title": "Security Systems & Alarm Engineering",
-    "description": "Size and verify end-of-line resistors for intrusion alarm zones: single vs double EOL, panel-specific values, DEOL state tables, and placement testing."
-  }
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Hardware Engineering & Security Systems",
+      "description": "Calculates and validates end-of-line resistor loops, copper wire resistance drops, and tamper states for commercial and residential alarm panels.",
+      "skills": [
+        "eol-resistor-calculator"
+      ]
+    }
+  ]
 }
