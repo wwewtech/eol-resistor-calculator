@@ -22,12 +22,12 @@ This registry catalogs **`eol-resistor-calculator`** across every AI agent direc
 
 | Repository | Focus / Category | Status |
 | :--- | :--- | :--- |
-| **sickn33/agentic-awesome-skills** (46,500+ ⭐) | AAS Core / `skills/eol-resistor-calculator/SKILL.md` | Prepared / Active |
-| **ComposioHQ/awesome-claude-skills** (75,000+ ⭐) | `Hardware, Security & Embedded Systems` | Prepared / Active |
-| **heilcheng/awesome-agent-skills** (6,200+ ⭐) | `Electronics & Hardware Engineering` | Prepared / Active |
-| **VoltAgent/awesome-agent-skills** (34,500+ ⭐) | `Community Skills -> Hardware & Security` | Prepared / Active |
-| **PatrickJS/awesome-cursorrules** (10,000+ ⭐) | `Hardware / Security / Embedded` (`rules/eol-resistor-calculator.mdc`) | Prepared / Active |
-| **BehiSecc/awesome-claude-skills** (10,000+ ⭐) | `Security & Hardware Tools` | Prepared / Active |
+| **sickn33/agentic-awesome-skills** (46,500+ ⭐) | AAS Core / `skills/eol-resistor-calculator/SKILL.md` | [PR #1560](https://github.com/sickn33/agentic-awesome-skills/pull/1560) |
+| **ComposioHQ/awesome-claude-skills** (75,000+ ⭐) | `Hardware, Security & Embedded Systems` | [PR #1960](https://github.com/ComposioHQ/awesome-claude-skills/pull/1960) |
+| **heilcheng/awesome-agent-skills** (6,200+ ⭐) | `Electronics & Hardware Engineering` | [PR #515](https://github.com/heilcheng/awesome-agent-skills/pull/515) |
+| **VoltAgent/awesome-agent-skills** (34,500+ ⭐) | `Community Skills -> Hardware & Security` | [PR #1090](https://github.com/VoltAgent/awesome-agent-skills/pull/1090) |
+| **PatrickJS/awesome-cursorrules** (10,000+ ⭐) | `Hardware / Security / Embedded` (`rules/eol-resistor-calculator.mdc`) | [PR #389](https://github.com/PatrickJS/awesome-cursorrules/pull/389) |
+| **BehiSecc/awesome-claude-skills** (10,000+ ⭐) | `Security & Hardware Tools` | [PR #745](https://github.com/BehiSecc/awesome-claude-skills/pull/745) |
 | **rohitg00/awesome-claude-code-toolkit** (2,300+ ⭐) | `Skills -> Hardware Engineering` | Prepared / Active |
 | **Prat011/awesome-llm-skills** (1,700+ ⭐) | `Electronics & Physical Security Skills` | Prepared / Active |
 | **libukai/awesome-agent-skills** (5,100+ ⭐) | `精选技能 -> 安防硬件与电子工程 (Security Hardware & Electronics)` | Prepared / Active |
