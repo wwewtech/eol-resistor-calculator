@@ -28,14 +28,12 @@ This registry catalogs **`eol-resistor-calculator`** across every AI agent direc
 | **VoltAgent/awesome-agent-skills** (34,500+ ⭐) | `Community Skills -> Hardware & Security` | [PR #1090](https://github.com/VoltAgent/awesome-agent-skills/pull/1090) |
 | **PatrickJS/awesome-cursorrules** (10,000+ ⭐) | `Hardware / Security / Embedded` (`rules/eol-resistor-calculator.mdc`) | [PR #389](https://github.com/PatrickJS/awesome-cursorrules/pull/389) |
 | **BehiSecc/awesome-claude-skills** (10,000+ ⭐) | `Security & Hardware Tools` | [PR #745](https://github.com/BehiSecc/awesome-claude-skills/pull/745) |
-| **rohitg00/awesome-claude-code-toolkit** (2,300+ ⭐) | `Skills -> Hardware Engineering` | Prepared / Active |
-| **Prat011/awesome-llm-skills** (1,700+ ⭐) | `Electronics & Physical Security Skills` | Prepared / Active |
-| **libukai/awesome-agent-skills** (5,100+ ⭐) | `精选技能 -> 安防硬件与电子工程 (Security Hardware & Electronics)` | Prepared / Active |
-| **skillmatic-ai/awesome-agent-skills** (670+ ⭐) | `Popular Collections / Hardware & Security` | Prepared / Active |
-| **philipbankier/awesome-agent-skills** | `Domain-Specific -> Security Systems` | Prepared / Active |
-| **karanb192/awesome-claude-skills** | `Hardware & Security Engineering` | Prepared / Active |
-| **spencerpauly/awesome-cursor-skills** | `Electronics & Circuit Design` | Prepared / Active |
-| **jqueryscript/awesome-claude-code** (510+ ⭐) | `Agent Skills -> Security Tools` | Prepared / Active |
+| **rohitg00/awesome-claude-code-toolkit** (2,300+ ⭐) | `Skills -> Security & Hardware` | [PR #805](https://github.com/rohitg00/awesome-claude-code-toolkit/pull/805) |
+| **Prat011/awesome-llm-skills** (1,700+ ⭐) | `Security & Systems` | [PR #259](https://github.com/Prat011/awesome-llm-skills/pull/259) |
+| **libukai/awesome-agent-skills** (5,100+ ⭐) | `精选技能 -> 产品使用` | [PR #166](https://github.com/libukai/awesome-agent-skills/pull/166) |
+| **skillmatic-ai/awesome-agent-skills** (670+ ⭐) | `Popular Collections` | [PR #183](https://github.com/skillmatic-ai/awesome-agent-skills/pull/183) |
+| **spencerpauly/awesome-cursor-skills** | `Code Quality & Security` | [PR #84](https://github.com/spencerpauly/awesome-cursor-skills/pull/84) |
+| **jqueryscript/awesome-claude-code** (510+ ⭐) | `Agent Skills` | [PR #690](https://github.com/jqueryscript/awesome-claude-code/pull/690) |
 | **awesome-electronics** | `Circuit calculations, sensor loop termination` | Target Catalog |
 | **awesome-hardware** | `Physical security & hardware interfaces` | Target Catalog |
 | **awesome-home-security** | `Alarm panels, intrusion sensors, tamper loops` | Target Catalog |
