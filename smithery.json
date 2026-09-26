@@ -3,7 +3,7 @@
   "displayName": "EOL Resistor Calculator",
   "version": "1.0.0",
   "description": "Calculates and validates end-of-line (EOL, SEOL, DEOL, TEOL) resistor loops for intrusion alarm panels (Honeywell, DSC, Paradox, Bosch, Texecom) with wire gauge resistance drop.",
-  "author": "wwewtech (Pavel Lebedev)",
+  "author": "wwew.tech",
   "repository": "https://github.com/wwewtech/eol-resistor-calculator",
   "homepage": "https://skills.sh/wwewtech/eol-resistor-calculator",
   "license": "MIT",
